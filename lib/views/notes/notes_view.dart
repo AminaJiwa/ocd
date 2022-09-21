@@ -13,7 +13,7 @@ class NotesView extends StatefulWidget {
   const NotesView({Key? key}) : super(key: key);
 
   @override
-  State<NotesView> createState() => _NotesViewState();
+  _NotesViewState createState() => _NotesViewState();
 }
 
 class _NotesViewState extends State<NotesView> {
@@ -23,7 +23,7 @@ class _NotesViewState extends State<NotesView> {
   @override
   void initState() {
     _notesService = NotesService();
-    _notesService.open();
+    // _notesService.open();
     super.initState();
   }
 
@@ -37,20 +37,21 @@ class _NotesViewState extends State<NotesView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Colors.teal[900],
-            title: const Text("✧˖° Your Notes ✧˖°"),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(newNoteRoute);
-                },
-                icon: const Icon(Icons.add),
-              ),
-              PopupMenuButton<MenuAction>(onSelected: (value) async {
+          backgroundColor: Colors.teal[900],
+          title: const Text(" Your Notes "),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(createOrUpdateNoteRoute);
+              },
+              icon: const Icon(Icons.add),
+            ),
+            PopupMenuButton<MenuAction>(
+              onSelected: (value) async {
                 switch (value) {
                   case MenuAction.logout:
-                    final shouldLogOut = await showLogoutDialog(context);
-                    if (shouldLogOut) {
+                    final shouldLogout = await showLogoutDialog(context);
+                    if (shouldLogout) {
                       await AuthService.firebase().logOut();
                       // ignore: use_build_context_synchronously
                       Navigator.of(context).pushNamedAndRemoveUntil(
@@ -58,15 +59,20 @@ class _NotesViewState extends State<NotesView> {
                         (_) => false,
                       );
                     }
-                    break;
+                  // break;
                 }
-              }, itemBuilder: (context) {
+              },
+              itemBuilder: (context) {
                 return const [
                   PopupMenuItem<MenuAction>(
-                      value: MenuAction.logout, child: Text("Logout"))
+                    value: MenuAction.logout,
+                    child: Text("Logout"),
+                  )
                 ];
-              })
-            ]),
+              },
+            )
+          ],
+        ),
         body: FutureBuilder(
             future: _notesService.getOrCreateUser(email: userEmail),
             builder: (context, snapshot) {
@@ -82,10 +88,16 @@ class _NotesViewState extends State<NotesView> {
                               final allNotes =
                                   snapshot.data as List<DatabaseNote>;
                               return NotesListView(
+                                notes: allNotes,
                                 onDeleteNote: (note) async {
                                   await _notesService.deleteNote(id: note.id);
                                 },
-                                notes: allNotes,
+                                onTap: (note) {
+                                  Navigator.of(context).pushNamed(
+                                    createOrUpdateNoteRoute,
+                                    arguments: note,
+                                  );
+                                },
                               );
                             } else {
                               return const CircularProgressIndicator();

@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:ocd/services/crud/crud_exceptions.dart';
 import "package:sqflite/sqflite.dart";
 import "package:path_provider/path_provider.dart";
 import "package:path/path.dart" show join;
-import 'crud_exceptions.dart';
 
 class NotesService {
   Database? _db;
@@ -66,9 +66,7 @@ class NotesService {
   Future<Iterable<DatabaseNote>> getAllNotes() async {
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
-    final notes = await db.query(
-      noteTable,
-    );
+    final notes = await db.query(noteTable);
     return notes.map((noteRow) => DatabaseNote.fromRow(noteRow));
   }
 
@@ -78,7 +76,7 @@ class NotesService {
     final notes = await db.query(
       noteTable,
       limit: 1,
-      where: "id =?",
+      where: "id = ?",
       whereArgs: [id],
     );
 
@@ -126,7 +124,7 @@ class NotesService {
     if (dbUser != owner) {
       throw CouldNotFindUser();
     }
-    const text = "";
+    const text = '';
     //create the note
     final noteId = await db.insert(noteTable, {
       userIdColumn: owner.id,
@@ -315,15 +313,15 @@ const isSyncedWithCloudColumn = "is_synced_with_cloud";
 //double quotation marks without string errors
 //create the user table
 const createUserTable = '''CREATE TABLE IF NOT EXISTS "user" (
-        "id" INTEGER NOT NULL,
-        "email" TEXT NOT NULL, UNIQUE,
+        "id"	INTEGER NOT NULL,
+        "email"	TEXT NOT NULL UNIQUE,
         PRIMARY KEY("id" AUTOINCREMENT)
-        );''';
+      );''';
 const createNoteTable = '''CREATE TABLE IF NOT EXISTS "note" (
-        "id" INTEGER NOT NULL,
-        "user_id" INTEGER NOT NULL,
-        "text" TEXT,
-        "is_synced_with_cloud" INTEGER NOT NULL DEFAULT 0,
+        "id"	INTEGER NOT NULL,
+        "user_id"	INTEGER NOT NULL,
+        "text"	TEXT,
+        "is_synced_with_cloud"	INTEGER NOT NULL DEFAULT 0,
         FOREIGN KEY("user_id") REFERENCES "user"("id"),
         PRIMARY KEY("id" AUTOINCREMENT)
-      ); ''';
+      );''';

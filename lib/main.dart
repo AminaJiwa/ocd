@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ocd/services/auth/auth_service.dart';
 import 'package:ocd/views/login_view.dart';
-import 'package:ocd/views/notes/new_notes_view.dart';
+import 'package:ocd/views/notes/create_update_note_view.dart';
 import 'package:ocd/views/notes/notes_view.dart';
 import 'package:ocd/views/register_view.dart';
 import 'package:ocd/views/verify_email_view.dart';
 import 'package:ocd/constants/routes.dart';
-import 'firebase_options.dart';
-import 'package:sqflite/sqflite.dart';
 //devtools is the alias for log - call the function by writing devtools.log()
 //show imports log specificallu of the developer package
 //import "dart:developer" as devtools show log;
@@ -29,7 +27,7 @@ void main() {
         registerRoute: (context) => const RegisterView(),
         notesRoute: (context) => const NotesView(),
         verifyEmailRoute: (context) => const VerifyEmailView(),
-        newNoteRoute: (context) => const NewNoteView(),
+        createOrUpdateNoteRoute: (context) => const CreateUpdateNoteView(),
       },
     ),
   );
@@ -61,7 +59,6 @@ class HomePage extends StatelessWidget {
 
           default:
             return const CircularProgressIndicator();
-          //return const Text("Loading... (₌♥ᆽ♥₌)");
         }
       },
     );
