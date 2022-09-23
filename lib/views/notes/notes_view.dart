@@ -3,10 +3,7 @@ import 'package:ocd/enums/menu_action.dart';
 import 'package:ocd/services/auth/auth_service.dart';
 import 'package:ocd/services/crud/notes_service.dart';
 import 'package:ocd/utilities/dialogs/logout_dialog.dart';
-import 'package:ocd/views/login_view.dart';
 import 'package:ocd/views/notes/notes_list_view.dart';
-import 'package:ocd/views/register_view.dart';
-import 'package:ocd/views/verify_email_view.dart';
 import 'package:ocd/constants/routes.dart';
 
 class NotesView extends StatefulWidget {
@@ -19,7 +16,7 @@ class NotesView extends StatefulWidget {
 class _NotesViewState extends State<NotesView> {
   late final NotesService _notesService;
   //! is force wrap it - instead of nullable
-  String get userEmail => AuthService.firebase().currentUser!.email!;
+  String get userEmail => AuthService.firebase().currentUser!.email;
   @override
   void initState() {
     _notesService = NotesService();
