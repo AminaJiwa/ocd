@@ -5,6 +5,8 @@ import "package:ocd/utilities/generics/get_arguments.dart";
 import "package:ocd/services/cloud/firebase_cloud_storage.dart";
 import "package:ocd/services/cloud/cloud_note.dart";
 import "package:ocd/services/cloud/cloud_storage_exceptions.dart";
+import "package:ocd/utilities/dialogs/cannot_share_empty_note_dialog.dart";
+import 'package:share_plus/share_plus.dart';
 
 class CreateUpdateNoteView extends StatefulWidget {
   const CreateUpdateNoteView({Key? key}) : super(key: key);
@@ -95,6 +97,19 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
       appBar: AppBar(
         title: const Text('New Note'),
         backgroundColor: Colors.teal[900],
+        actions: [
+          IconButton(
+            onPressed: () async {
+              final text = _textController.text;
+              if (_note == null || text.isEmpty) {
+                await showCannotShareEmptyNoteDialog(context);
+              } else {
+                Share.share(text);
+              }
+            },
+            icon: const Icon(Icons.share),
+          )
+        ],
       ),
       body: FutureBuilder(
         future: createOrGetExistingNote(context),
