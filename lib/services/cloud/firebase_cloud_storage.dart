@@ -48,26 +48,24 @@ class FirebaseCloudStorage {
           //get is a future - takes a snapshot at that point in time and returns it
           .get()
           .then((value) {
-        return value.docs.map(
-          (doc) {
-            return CloudNote(
-              documentId: doc.id,
-              ownerUserId: doc.data()[ownerUserIdFieldName] as String,
-              text: doc.data()[textFieldName] as String,
-            );
-          },
-        );
+        return value.docs.map((doc) => CloudNote.fromSnapshot(doc));
       });
     } catch (e) {
       throw CouldNotGetAllNotesException();
     }
   }
 
-  void createNewNote({required String ownerUserId}) async {
-    await notes.add({
+  Future<CloudNote> createNewNote({required String ownerUserId}) async {
+    final document = await notes.add({
       ownerUserIdFieldName: ownerUserId,
       textFieldName: "",
     });
+    final fetchedNote = await document.get();
+    return CloudNote(
+      documentId: fetchedNote.id,
+      ownerUserId: ownerUserId,
+      text: "",
+    );
   }
 
   //Singleton is a creational design pattern, which ensures that only one object
