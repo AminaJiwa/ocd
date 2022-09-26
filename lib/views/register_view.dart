@@ -60,7 +60,7 @@ class _RegisterViewState extends State<RegisterView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Enter your email and password to see your notes!'),
+              // const Text('Enter your email and password to see your notes!'),
               TextField(
                 controller: _email,
                 enableSuggestions: false,
@@ -105,8 +105,8 @@ class _RegisterViewState extends State<RegisterView> {
                       child: const Text('Already registered? Login here!'),
                     ),
                     Container(
-                      height: 400,
-                      width: 400,
+                      height: 300,
+                      width: 300,
                       child: Lottie.network(
                           'https://assets3.lottiefiles.com/packages/lf20_s4tubmwg.json'),
                     ),

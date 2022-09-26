@@ -60,8 +60,8 @@ class _LoginViewState extends State<LoginView> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const Text(
-                  'Please log in to your account in order to interact with and create notes!'),
+              //const Text(
+              // 'Please log in to your account in order to interact with and create notes!'),
               TextField(
                 controller: _email,
                 enableSuggestions: false,
@@ -110,8 +110,8 @@ class _LoginViewState extends State<LoginView> {
                 child: const Text('Not registered yet? Register here!'),
               ),
               Container(
-                height: 400,
-                width: 400,
+                height: 300,
+                width: 300,
                 child: Lottie.network(
                     'https://assets3.lottiefiles.com/packages/lf20_s4tubmwg.json'),
               ),

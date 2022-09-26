@@ -5,6 +5,7 @@ import 'package:ocd/services/auth/bloc/auth_event.dart';
 import 'package:ocd/services/auth/bloc/auth_state.dart';
 import 'package:ocd/utilities/dialogs/error_dialog.dart';
 import 'package:ocd/utilities/dialogs/password_reset_email_sent_dialog.dart';
+import 'package:lottie/lottie.dart';
 
 class ForgotPasswordView extends StatefulWidget {
   const ForgotPasswordView({Key? key}) : super(key: key);
@@ -53,7 +54,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
           child: Column(
             children: [
               const Text(
-                  'If you forgot your password, simply enter your email and we will send you a password reset link.'),
+                  'If you forgot your password, please enter your email below and a password reset link will be sent to you.'),
               TextField(
                 keyboardType: TextInputType.emailAddress,
                 autocorrect: false,
@@ -79,6 +80,12 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                       );
                 },
                 child: const Text('Back to login page'),
+              ),
+              Container(
+                height: 300,
+                width: 300,
+                child: Lottie.network(
+                    'https://assets3.lottiefiles.com/packages/lf20_s4tubmwg.json'),
               ),
             ],
           ),
