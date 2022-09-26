@@ -1,16 +1,8 @@
 # ocd
+This is a notes app I created using Dart/Flutter, Firebase, Firestore, Flutter Bloc and initially SQLite before I migrated to using a cloud database. I followed Vandad's tutorial, Flutter for Beginners on YouTube. This independent project was inspired by my friend who suffers from OCD and struggles with completing tasks and organising her notes related to her business on her phone. Therefore, I created this application so that she can organise her notes/ to do list easily.
 
-A new Flutter project.
+CREDIT:
 
-## Getting Started
+For the tutorial I used created by Vandad Nahavandipoor : https://www.youtube.com/watch?v=VPvVD8t02U8&t=64437s
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+For Lottie animations : https://lottiefiles.com/67834-ssssttt-shut-up-the-cat-is-sleeping 
