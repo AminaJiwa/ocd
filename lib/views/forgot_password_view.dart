@@ -81,12 +81,12 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 },
                 child: const Text('Back to login page'),
               ),
-              Container(
-                height: 300,
-                width: 300,
-                child: Lottie.network(
-                    'https://assets3.lottiefiles.com/packages/lf20_s4tubmwg.json'),
-              ),
+              // Container(
+              //   height: 300,
+              //   width: 300,
+              //   child: Lottie.network(
+              //       'https://assets3.lottiefiles.com/packages/lf20_s4tubmwg.json'),
+              // ),
             ],
           ),
         ),

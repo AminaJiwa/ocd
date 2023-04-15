@@ -109,12 +109,12 @@ class _LoginViewState extends State<LoginView> {
                 },
                 child: const Text('Not registered yet? Register here!'),
               ),
-              Container(
-                height: 300,
-                width: 300,
-                child: Lottie.network(
-                    'https://assets3.lottiefiles.com/packages/lf20_s4tubmwg.json'),
-              ),
+              // Container(
+              //   height: 300,
+              //   width: 300,
+              //   child: Lottie.network(
+              //       'https://assets3.lottiefiles.com/packages/lf20_s4tubmwg.json'),
+              // ),
             ],
           ),
         ),
